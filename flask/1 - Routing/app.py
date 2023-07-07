@@ -1,8 +1,7 @@
 # Flask class import
-from flask import Flask
+from flask import Flask, url_for, request, render_template, make_response
+from werkzeug.utils import secure_filename
 from markupsafe import escape
-from flask import url_for
-from flask import request
 
 ###################################################################################################
 #########################################    Example   ############################################
@@ -96,4 +95,58 @@ def http_login():
         return show_the_login_form()
     
 #########################################   Static Files   #########################################
-url_for('static', filename='style.css')
+# url_for('static', filename='style.css')
+
+#########################################   Rendering Templates   ##################################
+
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello(name=None):
+    return render_template('hello_html', name=name)
+
+#########################################   Request Object   #######################################
+
+def valid_login(username, password):
+    return True
+
+def log_the_user_in(username):
+    return f'{username} is logged in successfully!'
+
+@app.route('/login_request_test', methods=['GET', 'POST'])
+def login_request_test():
+    error = None
+    if request.method == 'POST':
+        if valid_login(request.form['username'], request.form['password']):
+            return log_the_user_in(request.form['username'])
+        else:
+            error = 'Invalid username/password'
+    return render_template('login.html', error=error)
+
+#########################################   File Upload   ##########################################
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if(request.method == 'POST'):
+        file = request.files['the_file']
+        file.save('/var/www/uploads/uploaded_file.txt')
+        
+        # If you want to know how the file was named on the client before it was uploaded to your application
+        file.save(f'/var/www/uploads/{secure_filename(file.filename)}')
+        
+#########################################   Cookies   ##############################################
+
+@app.route('/cookie')
+def cookie():
+    username = request.cookies.get('username')
+    
+
+#########################################   Response   #############################################
+
+@app.errorhandler(404)
+def not_found(error):
+    resp = make_response(render_template('error.html'), 404)
+    resp.headers['X-Something'] = 'A value'
+    return resp
+
+
+
