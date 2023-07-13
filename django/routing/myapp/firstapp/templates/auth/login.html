@@ -1,0 +1,17 @@
+{% extends 'layout/layout.html' %}
+{% block content %}
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" placeholder="Input the email" name="email" />
+        </div>
+        <div>
+            <label for="password"></label>
+            <input type="password" placeholder="Input the password" name="password">
+        </div>
+        <input type="submit" value="Submit" />
+    </form>
+    <a href="/">Home</a>
+{% endblock %}
