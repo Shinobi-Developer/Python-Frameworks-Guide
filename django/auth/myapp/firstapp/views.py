@@ -11,6 +11,7 @@ from .models import Users
 @csrf_protect
 
 # Create your views here.
+@login_required
 def about(request, title):
     template = loader.get_template('about.html')
     context = { 'title': title }
