@@ -1,6 +1,6 @@
 {% extends 'layout/layout.html' %}
 {% block content %}
-    <form method="POST" action="{% url 'register' %}">
+    <form method="POST" action="{% url 'signup' %}">
         {% csrf_token %}
         <div>
             <label for="name">Name:</label>
@@ -22,7 +22,14 @@
             <label for="password"></label>
             <input type="password" placeholder="Input the password" name="password" />
         </div>
+        <div>
+            <label for="confirm"></label>
+            <input type="password" placeholder="Input the confirm password" name="confirm" />
+        </div>
         <input type="submit" value="Submit" />
     </form>
+    {% for message in messages %}
+    <span>{{message}}</span>
+    {% endfor %}
     <a href="/">Home</a>
 {% endblock %}
