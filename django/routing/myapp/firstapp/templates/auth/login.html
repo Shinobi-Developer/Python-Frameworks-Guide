@@ -1,11 +1,11 @@
 {% extends 'layout/layout.html' %}
 {% block content %}
-    <form method="POST" action="{% url 'login' %}">
+    <form method="POST" action="{% url 'signin' %}">
         {% csrf_token %}
         
         <div>
             <label for="email">Email:</label>
-            <input type="email" placeholder="Input the email" name="email" />
+            <input type="text" placeholder="Input the email" name="email" />
         </div>
         <div>
             <label for="password"></label>
@@ -13,5 +13,8 @@
         </div>
         <input type="submit" value="Submit" />
     </form>
+    {% for message in messages %}
+    <span>{{message}}</span>
+    {% endfor %}
     <a href="/">Home</a>
 {% endblock %}
