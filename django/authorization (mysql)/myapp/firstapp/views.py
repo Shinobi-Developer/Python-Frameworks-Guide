@@ -2,13 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.template import loader
-from django.contrib import messages, auth
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 
 from .models import Users
 
 @csrf_protect
+@login_required
 
 # Create your views here.
 def about(request, title):

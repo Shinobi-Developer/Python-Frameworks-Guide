@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+</head>
+<body>
+    <form action="{% url 'save' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" />
+        </div>
+        <div>
+            <label for="author">Author</label>
+            <input type="text" name="author" />
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="text" name="description" />
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

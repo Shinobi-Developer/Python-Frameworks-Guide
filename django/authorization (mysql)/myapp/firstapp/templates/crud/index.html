@@ -1,0 +1,25 @@
+{%  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Actions</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published</th>
+        </thead>
+        <tbody>
+            {% for x in context %}
+            <td>{{x.title}}</td>
+            <td>{{x.author}}</td>
+            <td>{{x.published}}</td>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
